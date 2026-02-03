@@ -15,7 +15,7 @@ export const SignInPage = () => {
         // Куда Clerk вернет пользователя для обработки токена
         redirectUrl: ROUTES.ssoVerify,
         // Куда перенаправить пользователя после успешного входа
-        redirectUrlComplete: '/',
+        redirectUrlComplete: ROUTES.ssoSync,
       });
     } catch (err) {
       console.error('Ошибка входа:', err);

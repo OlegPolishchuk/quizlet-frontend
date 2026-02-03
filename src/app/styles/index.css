@@ -127,3 +127,11 @@
     @apply font-sans;
     }
 }
+
+@layer utilities {
+  .container {
+    width: 96% !important;
+    max-width: 96% !important;
+    margin: 0 auto;
+  }
+}

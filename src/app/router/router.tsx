@@ -3,6 +3,7 @@ import { ClerkProvider } from '@clerk/react-router';
 
 import App from '@/app/App.tsx';
 import { SignInPage } from '@/app/pages/auth/sign-in-page.tsx';
+import { SsoSyncPage } from '@/app/pages/auth/sso-sync-page.tsx';
 import { SsoVerifyPage } from '@/app/pages/auth/sso-verify-page.tsx';
 import { ProtectedRoute } from '@/app/router/protected-route.tsx';
 import { ROUTES } from '@/constants/constants.ts';
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.ssoVerify,
         element: <SsoVerifyPage />,
+      },
+      {
+        path: ROUTES.ssoSync,
+        element: <SsoSyncPage />,
       },
 
       // --- Приватные маршруты (сгруппированы) ---
