@@ -1,6 +1,8 @@
 import { useAuth } from '@clerk/clerk-react';
 import { LogOutIcon, UserIcon } from 'lucide-react';
 
+import { NavigationMobile } from '@/components/navigation/navigation-mobile.tsx';
+import { ThemeSwitcher } from '@/components/theme-switcher/theme-switcher.tsx';
 import { Avatar, AvatarImage } from '@/components/ui/avatar.tsx';
 import {
   DropdownMenu,
@@ -20,12 +22,16 @@ export const Header = () => {
   const user = data?.data;
 
   return (
-    <header className={'py-2 border-b'}>
-      <div className={'container flex items-center justify-end'}>
+    <header className={'py-2 border-b min-h-[50px]'}>
+      <div className={'container flex items-center justify-between md:justify-end '}>
+        <NavigationMobile />
+
+        <ThemeSwitcher className={'md:mr-20'} />
+
         {user ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Avatar className={''}>
+              <Avatar className={'md:self-end'}>
                 <AvatarImage src={user.imageUrl} alt="@shadcn" />
               </Avatar>
             </DropdownMenuTrigger>
@@ -49,14 +55,14 @@ export const Header = () => {
                   <div className={'w-[32px] flex justify-center'}>
                     <UserIcon />
                   </div>
-                  <span className={'text-[12px]'}>Profile</span>
+                  <span className={'text-[12px]'}>Профиль</span>
                 </DropdownMenuItem>
 
                 <DropdownMenuItem className={'h-[45px]'} onSelect={() => signOut()}>
                   <div className={'w-[32px] flex justify-center'}>
                     <LogOutIcon />
                   </div>
-                  <span className={'text-[12px]'}>Sign Out</span>
+                  <span className={'text-[12px]'}>Выйти</span>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
             </DropdownMenuContent>

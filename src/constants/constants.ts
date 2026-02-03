@@ -4,6 +4,11 @@ export const ROUTES = {
   signIn: '/sign-in',
   ssoVerify: '/sso-verify',
   ssoSync: '/sso-sync',
+
+  modules: '/modules',
+
+  folders: '/folders',
+  createFolder: '/create-folder',
 };
 
 export const DEFAULT_STALE_TIME = 60 * 60 * 1000;
