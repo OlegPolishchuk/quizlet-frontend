@@ -12,5 +12,5 @@ export const getPrivateFolders = () => {
 };
 
 export const deleteFolder = (folderId: string) => {
-  return api.delete<ListResponse<Folder>>(`folders/${folderId}`);
+  return api.delete<ListResponse<Folder>>(`/folders/${folderId}`);
 };

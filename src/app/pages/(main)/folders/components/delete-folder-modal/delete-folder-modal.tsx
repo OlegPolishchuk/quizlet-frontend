@@ -1,3 +1,5 @@
+import type { MouseEvent } from 'react';
+
 import { DeleteButton } from '@/components/buttons/delete-button.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import {
@@ -25,7 +27,11 @@ export const DeleteFolderModal = ({ folder, open, onOpenChange }: Props) => {
   const deleteNoteMutation = useDeleteFolder();
   const disabled = deleteNoteMutation.isPending;
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: MouseEvent) => {
+    e.preventDefault();
+
+    console.log('DELETE CLICK');
+
     deleteNoteMutation.mutate(folder.id, {
       onSuccess: () => {
         onOpenChange(false);

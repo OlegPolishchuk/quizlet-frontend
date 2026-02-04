@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { FolderIcon, MoreVertical } from 'lucide-react';
@@ -38,6 +39,12 @@ export const FolderCard = ({ folder, className }: Props) => {
     navigate('/');
   };
 
+  const handleShowDeleteModal = (e: MouseEvent) => {
+    e.stopPropagation();
+
+    setOpenDeleteModal(true);
+  };
+
   return (
     <>
       <Item variant="outline" className={className}>
@@ -64,7 +71,7 @@ export const FolderCard = ({ folder, className }: Props) => {
                 </EditButton>
               </DropdownMenuItem>
 
-              <DropdownMenuItem onClick={() => setOpenDeleteModal(true)}>
+              <DropdownMenuItem onClick={handleShowDeleteModal}>
                 <DeleteButton className={'w-full justify-between'}>Удалить</DeleteButton>
               </DropdownMenuItem>
             </DropdownMenuContent>
