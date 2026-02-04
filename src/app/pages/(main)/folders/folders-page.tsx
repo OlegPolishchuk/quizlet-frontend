@@ -2,6 +2,7 @@ import { Link } from 'react-router';
 import { FolderCode, PlusIcon } from 'lucide-react';
 
 import { FolderCard } from '@/app/pages/(main)/folders/components/folder-card/folder-card.tsx';
+import { FoldersPageSkeleton } from '@/app/pages/(main)/folders/components/folders-page-skeleton/folders-page-skeleton.tsx';
 import { CreateButton } from '@/components/buttons/create-button.tsx';
 import { Button } from '@/components/ui/button';
 import {
@@ -18,7 +19,7 @@ import { useGetPrivateFolders } from '@/services/folders/hooks.tsx';
 
 export const FoldersPage = () => {
   const foldersRequest = useGetPrivateFolders();
-  const folders = foldersRequest.data?.data.items ?? [];
+  const folders = foldersRequest.data?.data.items;
 
   return (
     <div className={'flex flex-col gap-6'}>
@@ -32,7 +33,9 @@ export const FoldersPage = () => {
         </Link>
       </div>
 
-      {!folders.length && (
+      {foldersRequest.isPending && <FoldersPageSkeleton />}
+
+      {!folders?.length && !foldersRequest.isPending && (
         <Empty>
           <EmptyHeader>
             <EmptyMedia variant="icon">
@@ -57,7 +60,7 @@ export const FoldersPage = () => {
       )}
 
       <div className={'flex flex-col gap-4'}>
-        {folders.map(folder => (
+        {folders?.map(folder => (
           <Link key={folder.id} to={`${ROUTES.folders}/${folder.id}`}>
             <FolderCard folder={folder} />
           </Link>

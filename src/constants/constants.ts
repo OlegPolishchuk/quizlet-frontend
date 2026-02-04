@@ -9,6 +9,7 @@ export const ROUTES = {
 
   folders: '/folders',
   createFolder: '/create-folder',
+  updateFolder: '/update-folder',
 };
 
 export const DEFAULT_STALE_TIME = 60 * 60 * 1000;

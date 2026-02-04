@@ -8,7 +8,9 @@ import {
 import {
   createNewFolder,
   deleteFolder,
+  getFolderById,
   getPrivateFolders,
+  updateFolder,
 } from '@/services/folders/requests.ts';
 
 export const folderQueryOptions = queryOptions({
@@ -34,6 +36,17 @@ export const useCreateFolder = () => {
   });
 };
 
+export const useUpdateFolder = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: updateFolder,
+    onSuccess: () => {
+      queryClient.invalidateQueries(folderQueryOptions);
+    },
+  });
+};
+
 export const useDeleteFolder = () => {
   const queryClient = useQueryClient();
 
@@ -42,5 +55,18 @@ export const useDeleteFolder = () => {
     onSuccess: () => {
       queryClient.invalidateQueries(folderQueryOptions);
     },
+  });
+};
+
+export const getCurrentFolderQueryOptions = (folderId: string) => {
+  return queryOptions({
+    queryKey: ['folder', folderId],
+    queryFn: () => getFolderById(folderId),
+  });
+};
+
+export const useGetFolderById = (folderId: string) => {
+  return useQuery({
+    ...getCurrentFolderQueryOptions(folderId),
   });
 };

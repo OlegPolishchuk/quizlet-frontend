@@ -34,12 +34,12 @@ export const FolderForm = ({ className, formId, submitCallback, disabled }: Prop
           disabled={disabled}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor="create_project_form_name">
+              <FieldLabel htmlFor="folder-title">
                 Название папки <Asterisk />
               </FieldLabel>
               <Input
                 {...field}
-                id="create_folder_form_name"
+                id="folder-title"
                 aria-invalid={fieldState.invalid}
                 placeholder="Новая папка"
               />
@@ -55,11 +55,11 @@ export const FolderForm = ({ className, formId, submitCallback, disabled }: Prop
           disabled={disabled}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor="create_project_form_description">Описание</FieldLabel>
+              <FieldLabel htmlFor="folder-description">Описание</FieldLabel>
               <Textarea
                 className={'h-[150px] resize-none'}
                 {...field}
-                id="create_folder_form_description"
+                id="folder-description"
                 aria-invalid={fieldState.invalid}
                 placeholder="Описание папки"
               />
@@ -71,11 +71,12 @@ export const FolderForm = ({ className, formId, submitCallback, disabled }: Prop
 
       <FieldGroup>
         <Controller
+          key={form.watch('visibility')}
           name="visibility"
           control={form.control}
           render={({ field, fieldState }) => (
             <Field orientation="vertical" data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor={'create_project_form_project_status'}>
+              <FieldLabel htmlFor={'folder-visibiliti'}>
                 Видимость <Asterisk />
               </FieldLabel>
 
@@ -85,7 +86,7 @@ export const FolderForm = ({ className, formId, submitCallback, disabled }: Prop
                 onValueChange={field.onChange}
               >
                 <SelectTrigger
-                  id="create_project_form_project_status"
+                  id="folder-visibiliti"
                   aria-invalid={fieldState.invalid}
                   className="min-w-[120px]"
                 >

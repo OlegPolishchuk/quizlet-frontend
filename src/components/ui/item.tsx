@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react';
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Slot } from 'radix-ui';
@@ -143,11 +144,17 @@ function ItemDescription({ className, ...props }: React.ComponentProps<'p'>) {
   );
 }
 
-function ItemActions({ className, ...props }: React.ComponentProps<'div'>) {
+function ItemActions({ className, onClick, ...props }: React.ComponentProps<'div'>) {
+  const handleClick = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    onClick?.(e);
+  };
+
   return (
     <div
       data-slot="item-actions"
       className={cn('gap-2 flex items-center', className)}
+      onClick={handleClick}
       {...props}
     />
   );

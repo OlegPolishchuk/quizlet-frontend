@@ -11,6 +11,17 @@ export const getPrivateFolders = () => {
   return api.get<ListResponse<Folder>>('/folders/');
 };
 
+export const getFolderById = (folderId: string) => {
+  return api.get<Folder>(`/folders/${folderId}`);
+};
+
 export const deleteFolder = (folderId: string) => {
-  return api.delete<ListResponse<Folder>>(`/folders/${folderId}`);
+  return api.delete<Folder>(`/folders/${folderId}`);
+};
+
+export const updateFolder = (
+  updateFolderData: CreateFolderSchema & { folderId: string },
+) => {
+  const { folderId, ...data } = updateFolderData;
+  return api.put<Folder>(`/folders/${folderId}`, data);
 };

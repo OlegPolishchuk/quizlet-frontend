@@ -20,6 +20,7 @@ import {
   ItemMedia,
   ItemTitle,
 } from '@/components/ui/item.tsx';
+import { ROUTES } from '@/constants/constants.ts';
 import type { Folder } from '@/services/folders/types.ts';
 
 import { DeleteFolderModal } from '../delete-folder-modal/delete-folder-modal.tsx';
@@ -36,7 +37,7 @@ export const FolderCard = ({ folder, className }: Props) => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const handleEditLinkClick = () => {
-    navigate('/');
+    navigate(ROUTES.updateFolder + '/' + folder.id);
   };
 
   const handleShowDeleteModal = (e: MouseEvent) => {
