@@ -1,4 +1,5 @@
 import type { MouseEvent } from 'react';
+import { toast } from 'sonner';
 
 import { DeleteButton } from '@/components/buttons/delete-button.tsx';
 import { Button } from '@/components/ui/button.tsx';
@@ -14,6 +15,7 @@ import {
 } from '@/components/ui/dialog.tsx';
 import { Field } from '@/components/ui/field.tsx';
 import { Separator } from '@/components/ui/separator.tsx';
+import { extractAxiosError } from '@/lib/utils.ts';
 import { useDeleteFolder } from '@/services/folders/hooks.tsx';
 import type { Folder } from '@/services/folders/types.ts';
 
@@ -30,11 +32,14 @@ export const DeleteFolderModal = ({ folder, open, onOpenChange }: Props) => {
   const handleSubmit = (e: MouseEvent) => {
     e.preventDefault();
 
-    console.log('DELETE CLICK');
-
     deleteNoteMutation.mutate(folder.id, {
       onSuccess: () => {
         onOpenChange(false);
+      },
+      onError: err => {
+        onOpenChange(false);
+        const { message } = extractAxiosError(err);
+        toast.success(message);
       },
     });
   };
