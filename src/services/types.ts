@@ -17,3 +17,5 @@ export interface ListResponse<ItemsType> {
   page: number;
   items: ItemsType[];
 }
+
+export type Visibility = 'PRIVATE' | 'PUBLIC';

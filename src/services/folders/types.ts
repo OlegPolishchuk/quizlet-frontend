@@ -1,3 +1,5 @@
+import type { Visibility } from '@/services/types.ts';
+
 export interface Folder {
   id: string;
   ownerId: string;
@@ -11,8 +13,6 @@ export interface Folder {
   createdAt: string;
   updatedAt: string;
 }
-
-export type Visibility = 'PRIVATE' | 'PUBLIC';
 
 export const VISIBILITY = {
   PRIVATE: 'Private',

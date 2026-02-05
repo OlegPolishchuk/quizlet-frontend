@@ -85,3 +85,15 @@ export function handleError(err: Error, errorConstant: Record<string, string>) {
     description: `${message || error.response?.data}`,
   });
 }
+
+/******************************************* */
+/******************************************* */
+/******************************************* */
+/* Функция для озвувичанеия слов в браузере */
+export const speakWord = (word: string) => {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = 'en-US';
+
+  // Озвучиваем
+  window.speechSynthesis.speak(utterance);
+};

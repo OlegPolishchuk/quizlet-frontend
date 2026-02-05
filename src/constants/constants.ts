@@ -5,11 +5,15 @@ export const ROUTES = {
   ssoVerify: '/sso-verify',
   ssoSync: '/sso-sync',
 
-  modules: '/modules',
-
+  /* Folders */
   folders: '/folders',
   createFolder: '/create-folder',
   updateFolder: '/update-folder',
+
+  /* Modules (карточки) */
+  modules: '/modules',
+  createModule: '/create-module',
+  updateModule: '/update-module',
 };
 
 export const DEFAULT_STALE_TIME = 60 * 60 * 1000;
