@@ -22,7 +22,7 @@ export const useDebounceCallback = <Params extends unknown[], Return>(
       timerRef.current = null;
     };
 
-    const debouncedCallback = function (this: any, ...args: Params) {
+    const debouncedCallback = function (this: unknown, ...args: Params) {
       cancel();
       timerRef.current = setTimeout(() => {
         internalCallbackRef.current.apply(this, args);

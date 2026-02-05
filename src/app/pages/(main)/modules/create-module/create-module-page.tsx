@@ -28,11 +28,11 @@ import {
 import { Field } from '@/components/ui/field.tsx';
 import { Typography } from '@/components/ui/typography.tsx';
 import { ROUTES } from '@/constants/constants.ts';
-import { useCreateFolder } from '@/services/folders/hooks.tsx';
+import { useCreateModule } from '@/services/module/hooks.tsx';
 
 export const CreateModulePage = () => {
   const navigate = useNavigate();
-  const createFolderMutation = useCreateFolder();
+  const createModuleMutation = useCreateModule();
 
   const form = useForm<CreateStudySetInput>({
     resolver: zodResolver(CreateStudySetSchema),
@@ -50,10 +50,15 @@ export const CreateModulePage = () => {
   });
 
   const handleSubmit = (data: CreateStudySetInput) => {
-    console.log('data =>', data);
+    createModuleMutation.mutate(data, {
+      onSuccess: () => {
+        navigate(ROUTES.modules);
+      },
+    });
   };
 
-  const disabled = createFolderMutation.isPending;
+  const isLoading = createModuleMutation.isPending;
+  const disabled = isLoading || !form.formState.isDirty;
 
   return (
     <>
@@ -106,7 +111,7 @@ export const CreateModulePage = () => {
                 type="submit"
                 form="create_module_form"
                 disabled={disabled}
-                loading={disabled}
+                loading={isLoading}
               >
                 Создать
               </Button>
