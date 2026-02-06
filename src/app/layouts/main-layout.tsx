@@ -11,7 +11,7 @@ export const MainLayout = reatomComponent(({ children }: { children: ReactNode }
       <Navigation />
 
       <div className={'container flex'}>
-        <main>{children}</main>
+        <main className={'w-full'}>{children}</main>
       </div>
     </>
   );

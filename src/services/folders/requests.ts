@@ -8,7 +8,7 @@ export const createNewFolder = (foolderData: CreateFolderSchema) => {
 };
 
 export const getPrivateFolders = () => {
-  return api.get<ListResponse<Folder>>('/folders/');
+  return api.get<ListResponse<Folder>>('/folders');
 };
 
 export const getFolderById = (folderId: string) => {
