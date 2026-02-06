@@ -1,7 +1,6 @@
 import { useAuth } from '@clerk/clerk-react';
 import { LogOutIcon, UserIcon } from 'lucide-react';
 
-import { NavigationMobile } from '@/components/navigation/navigation-mobile.tsx';
 import { ThemeSwitcher } from '@/components/theme-switcher/theme-switcher.tsx';
 import { Avatar, AvatarImage } from '@/components/ui/avatar.tsx';
 import {
@@ -22,10 +21,8 @@ export const Header = () => {
   const user = data?.data;
 
   return (
-    <header className={'py-2 border-b min-h-[50px]'}>
+    <header className={'py-2 border-b min-h-[50px] mb-3'}>
       <div className={'container flex items-center justify-between md:justify-end '}>
-        <NavigationMobile />
-
         <ThemeSwitcher className={'md:mr-20'} />
 
         {user ? (

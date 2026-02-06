@@ -8,11 +8,10 @@ export const MainLayout = reatomComponent(({ children }: { children: ReactNode }
   return (
     <>
       <Header />
+      <Navigation />
 
       <div className={'container flex'}>
-        <Navigation />
-
-        <main className={'w-full py-6 md:pl-6'}>{children}</main>
+        <main>{children}</main>
       </div>
     </>
   );

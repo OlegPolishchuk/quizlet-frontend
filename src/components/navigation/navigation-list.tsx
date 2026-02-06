@@ -10,8 +10,8 @@ interface Props {
 
 export const NavigationList = ({ listClassName, className, clickCallback }: Props) => {
   const linkClassName =
-    'text-sm w-full px-4 md:px-0 py-4 flex items-center gap-4 hover:text-primary transition-all';
-  const activeClassName = twMerge(linkClassName, 'text-primary');
+    'text-sm w-full px-4 md:px-0 py-4 flex items-center gap-4 hover:text-primary transition-all border-b! ';
+  const activeClassName = twMerge(linkClassName, 'text-primary border-primary');
 
   const handleCLick = () => {
     if (clickCallback) {
