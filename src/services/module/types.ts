@@ -6,8 +6,12 @@ export interface Module {
   folderId?: string;
   title: string;
   description: string;
-  terms: Term[];
+  cards: Term[];
   isPublished: boolean;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface ModuleListItem extends Exclude<Module, 'cards'> {
+  cardsCount: number;
 }

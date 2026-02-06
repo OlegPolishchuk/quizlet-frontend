@@ -7,16 +7,16 @@ import {
 
 import { createModule, getModules } from '@/services/module/requests.ts';
 
-export const getModulesQueryOptions = (userId: string) => {
+export const getModulesQueryOptions = () => {
   return queryOptions({
-    queryKey: ['modules', userId],
+    queryKey: ['modules'],
     queryFn: getModules,
   });
 };
 
-export const useGetModules = (userId: string) => {
+export const useGetModules = () => {
   return useQuery({
-    ...getModulesQueryOptions(userId),
+    ...getModulesQueryOptions(),
     retry: false,
   });
 };
@@ -26,10 +26,8 @@ export const useCreateModule = () => {
 
   return useMutation({
     mutationFn: createModule,
-    onSuccess: res => {
-      const useId = res.data.ownerId;
-
-      queryClient.invalidateQueries(getModulesQueryOptions(useId));
+    onSuccess: () => {
+      queryClient.invalidateQueries(getModulesQueryOptions());
     },
   });
 };

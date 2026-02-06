@@ -1,6 +1,8 @@
 import { Link } from 'react-router';
 import { FolderCode, PlusIcon } from 'lucide-react';
 
+import { ModuleCard } from '@/app/pages/(main)/modules/components/module-card/module-card.tsx';
+import { ModulesPageSkeleton } from '@/app/pages/(main)/modules/components/modules-page-skeleton/modules-page-skeleton.tsx';
 import { CreateButton } from '@/components/buttons/create-button.tsx';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,9 +15,11 @@ import {
 } from '@/components/ui/empty.tsx';
 import { Typography } from '@/components/ui/typography.tsx';
 import { ROUTES } from '@/constants/constants.ts';
+import { useGetModules } from '@/services/module/hooks.tsx';
 
 export const ModulesPage = () => {
-  const modules = [];
+  const modulesQuery = useGetModules();
+  const modules = modulesQuery.data?.data.items;
 
   return (
     <div className={'flex flex-col gap-6'}>
@@ -29,7 +33,9 @@ export const ModulesPage = () => {
         </Link>
       </div>
 
-      {!modules?.length && (
+      {modulesQuery.isPending && <ModulesPageSkeleton />}
+
+      {!modules?.length && !modulesQuery.isPending && (
         <Empty>
           <EmptyHeader>
             <EmptyMedia variant="icon">
@@ -53,6 +59,14 @@ export const ModulesPage = () => {
           </EmptyContent>
         </Empty>
       )}
+
+      <div className={'flex flex-col gap-4'}>
+        {modules?.map(module => (
+          <Link key={module.id} to={`${ROUTES.modules}/${module.id}`}>
+            <ModuleCard module={module} />
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

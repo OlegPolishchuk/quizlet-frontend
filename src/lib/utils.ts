@@ -1,7 +1,10 @@
 import type { AxiosError } from 'axios';
 import { type ClassValue, clsx } from 'clsx';
+import dayjs from 'dayjs';
 import { toast } from 'sonner';
 import { twMerge } from 'tailwind-merge';
+
+import { DEFAULT_DATE_FORMAT } from '@/constants/constants.ts';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -97,3 +100,14 @@ export const speakWord = (word: string) => {
   // Озвучиваем
   window.speechSynthesis.speak(utterance);
 };
+
+/******************************************* */
+/******************************************* */
+/******************************************* */
+/* Функция для форматирования дат с помощью dayjs */
+export function formatDate(
+  date: string | Date | undefined,
+  format = DEFAULT_DATE_FORMAT,
+) {
+  return dayjs(date).format(format);
+}

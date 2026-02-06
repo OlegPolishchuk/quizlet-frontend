@@ -5,6 +5,7 @@ import { FolderPage } from '@/app/pages/(main)/folders/[folderId]/folder-page.ts
 import { CreateFolderPage } from '@/app/pages/(main)/folders/create-folder/create-folder-page.tsx';
 import { FoldersPage } from '@/app/pages/(main)/folders/folders-page.tsx';
 import { UpdateFolderPage } from '@/app/pages/(main)/folders/update-folder/update-folder-page.tsx';
+import { ModulePage } from '@/app/pages/(main)/modules/components/[moduleId]/module-page.tsx';
 import { CreateModulePage } from '@/app/pages/(main)/modules/create-module/create-module-page.tsx';
 import { ModulesPage } from '@/app/pages/(main)/modules/modules-page.tsx';
 import { SignInPage } from '@/app/pages/auth/sign-in-page.tsx';
@@ -55,7 +56,9 @@ export const router = createBrowserRouter([
 
               /* Modules */
               { path: ROUTES.modules, element: <ModulesPage /> },
+              { path: `${ROUTES.modules}/:moduleId`, element: <ModulePage /> },
               { path: ROUTES.createModule, element: <CreateModulePage /> },
+              { path: ROUTES.updateModule, element: <p>Update Module</p> },
             ],
           },
         ],

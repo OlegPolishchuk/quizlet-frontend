@@ -1,9 +1,10 @@
 import type { MouseEvent } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { FolderIcon, MoreVertical } from 'lucide-react';
+import { File, MoreVertical } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
+import { DeleteModuleModal } from '@/app/pages/(main)/modules/components/delete-module-modal/delete-module-modal.tsx';
 import { DeleteButton } from '@/components/buttons/delete-button.tsx';
 import { EditButton } from '@/components/buttons/edit-button.tsx';
 import { Button } from '@/components/ui/button.tsx';
@@ -17,30 +18,32 @@ import {
   Item,
   ItemActions,
   ItemContent,
+  ItemDescription,
   ItemMedia,
   ItemTitle,
 } from '@/components/ui/item.tsx';
+import { Typography } from '@/components/ui/typography.tsx';
 import { ROUTES } from '@/constants/constants.ts';
-import type { Folder } from '@/services/folders/types.ts';
-
-import { DeleteFolderModal } from '../delete-folder-modal/delete-folder-modal.tsx';
+import { formatDate } from '@/lib/utils.ts';
+import type { ModuleListItem } from '@/services/module/types.ts';
 
 interface Props {
-  folder: Folder;
+  module: ModuleListItem;
   className?: string;
 }
 
-export const FolderCard = ({ folder, className }: Props) => {
+export const ModuleCard = ({ module, className }: Props) => {
   const navigate = useNavigate();
 
   const [openDropdown, setOpenDropdown] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const handleEditLinkClick = () => {
-    navigate(ROUTES.updateFolder + '/' + folder.id);
+    navigate(ROUTES.updateModule + '/' + module.id);
   };
 
   const handleShowDeleteModal = (e: MouseEvent) => {
+    /**/
     e.stopPropagation();
 
     setOpenDeleteModal(true);
@@ -49,13 +52,25 @@ export const FolderCard = ({ folder, className }: Props) => {
   return (
     <>
       <Item variant="outline" className={className}>
-        <ItemMedia variant="icon">
-          <FolderIcon />
-        </ItemMedia>
+        <div className={'flex flex-col gap-2 flex-1'}>
+          <div className={'flex items-center gap-4'}>
+            <Typography variant={'muted'}>{formatDate(module.createdAt)}</Typography>
+            <Typography variant={'muted'}>
+              Количество карточек: {module.cardsCount}
+            </Typography>
+          </div>
 
-        <ItemContent>
-          <ItemTitle>{folder.title}</ItemTitle>
-        </ItemContent>
+          <div className={'flex items-center gap-2'}>
+            <ItemMedia variant="icon">
+              <File />
+            </ItemMedia>
+
+            <ItemContent>
+              <ItemTitle>{module.title}</ItemTitle>
+              <ItemDescription>{module.description}</ItemDescription>
+            </ItemContent>
+          </div>
+        </div>
 
         <ItemActions>
           <DropdownMenu open={openDropdown} onOpenChange={setOpenDropdown}>
@@ -80,8 +95,8 @@ export const FolderCard = ({ folder, className }: Props) => {
         </ItemActions>
       </Item>
 
-      <DeleteFolderModal
-        folder={folder}
+      <DeleteModuleModal
+        module={module}
         open={openDeleteModal}
         onOpenChange={setOpenDeleteModal}
       />

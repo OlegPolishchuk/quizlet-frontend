@@ -17,22 +17,23 @@ import { Field } from '@/components/ui/field.tsx';
 import { Separator } from '@/components/ui/separator.tsx';
 import { extractAxiosError } from '@/lib/utils.ts';
 import { useDeleteFolder } from '@/services/folders/hooks.tsx';
-import type { Folder } from '@/services/folders/types.ts';
+import type { Module, ModuleListItem } from '@/services/module/types.ts';
 
 interface Props {
-  folder: Folder;
+  module: ModuleListItem | Module;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
-export const DeleteFolderModal = ({ folder, open, onOpenChange }: Props) => {
+export const DeleteModuleModal = ({ module, open, onOpenChange }: Props) => {
   const deleteNoteMutation = useDeleteFolder();
   const disabled = deleteNoteMutation.isPending;
 
   const handleSubmit = (e: MouseEvent) => {
+    /**/
     e.preventDefault();
 
-    deleteNoteMutation.mutate(folder.id, {
+    deleteNoteMutation.mutate(module.id, {
       onSuccess: () => {
         onOpenChange(false);
       },
@@ -49,8 +50,8 @@ export const DeleteFolderModal = ({ folder, open, onOpenChange }: Props) => {
       <DialogTrigger asChild></DialogTrigger>
       <DialogContent className={'max-h-[90%]'}>
         <DialogHeader>
-          <DialogTitle>Удалить папку</DialogTitle>
-          <DialogDescription>Вы действительно хотите удалить папку?</DialogDescription>
+          <DialogTitle>Удалить модуль</DialogTitle>
+          <DialogDescription>Вы действительно хотите удалить модуль?</DialogDescription>
         </DialogHeader>
 
         <Separator className={'h-[1px] bg-border'} />
